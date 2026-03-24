@@ -10,7 +10,7 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
-import { useActionState, useEffect, useRef } from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
 
 import { createPrompt } from "@/app/actions/prompts";
 import type { PromptFormState } from "@/lib/types/prompt-form";
@@ -46,10 +46,11 @@ export function PromptForm() {
         action={formAction}
         className="flex flex-col gap-5"
       >
-        <TextField fullWidth name="title" variant="secondary">
+        <TextField fullWidth variant="secondary">
           <Label>Başlık (isteğe bağlı)</Label>
           <TextArea
             className="min-h-12 w-full resize-y"
+            name="title"
             placeholder="Örn. Ürün açıklaması taslağı"
             rows={2}
           />
@@ -60,12 +61,12 @@ export function PromptForm() {
           fullWidth
           isRequired
           isInvalid={Boolean(state.error)}
-          name="content"
           variant="secondary"
         >
           <Label>Prompt</Label>
           <TextArea
             className="min-h-36 w-full resize-y"
+            name="content"
             placeholder="AI için tam prompt metnini buraya yazın…"
             rows={8}
           />
@@ -83,7 +84,9 @@ export function PromptForm() {
           onPress={() => {
             const el = formRef.current;
             if (!el) return;
-            formAction(new FormData(el));
+            startTransition(() => {
+              formAction(new FormData(el));
+            });
           }}
         >
           {({ isPending: pending }) => (
