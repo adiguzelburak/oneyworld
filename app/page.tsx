@@ -21,11 +21,11 @@ export default async function Home() {
           </div>
           <a
             className="text-muted hover:text-foreground text-sm underline underline-offset-4"
-            href="/docs"
+            href="/api/docs"
             rel="noreferrer"
             target="_blank"
           >
-            FastAPI dokümantasyonu (/api)
+            FastAPI dokümantasyonu (Swagger)
           </a>
         </div>
       </header>
