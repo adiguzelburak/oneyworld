@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# python (Vercel api/ + yerel uvicorn)
+.venv/
+
 # dependencies
 /node_modules
 /.pnp
